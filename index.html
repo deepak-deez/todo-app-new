@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <h1 class="header">todos</h1>
+    <div class="container">
+      <div class="add-todo-container">
+        <input
+          type="text"
+          placeholder="what needs to be done!"
+          id="inputTodo"
+        />
+        <button id="addTodoBtn">
+          <i class="fas fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div id="display-todo-container" class="destination">
+        <!-- <div class="todo-element todoallowed" id="add-element">
+          <span></span>
+          <button class="tick"><i class="fas fa-solid fa-check"></i></button>
+          <button class="trash"><i class="fas fa-regular fa-trash"></i></button>
+        </div> -->
+      </div>
+      <div class="menu">
+        <button id="all">All</button>
+        <button id="active">Active</button>
+        <button id="complete">Completed</button>
+        <button id="clear-complete">Clear Completed</button>
+        <button id="clean">Clear All</button>
+      </div>
+    </div>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>

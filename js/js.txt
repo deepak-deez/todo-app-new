@@ -1,0 +1,136 @@
+const inputTodo = document.getElementById("inputTodo");
+const addTodoBtn = document.getElementById("addTodoBtn");
+const addElement = document.getElementById("add-element");
+const displayTodo = document.getElementById("display-todo-container");
+clearButton = document.getElementById("clean");
+allButton = document.getElementById("all");
+incompleteButton = document.getElementById("active");
+completedButton = document.getElementById("complete");
+clearCompletedButton = document.getElementById("clear-complete");
+
+addTodoBtn.addEventListener("click", run);
+let added;
+var todoArr = [];
+function display(added) {
+  displayTodo.appendChild(added);
+  // console.log("done");
+}
+function run() {
+  let inputTodoValue = inputTodo.value.trim();
+
+  if (inputTodoValue == "") {
+    alert("Field cannot be empty!");
+  } else {
+    const obj = {
+      value: "",
+      id: Date.now(),
+      completed: false,
+    };
+    obj.value = inputTodoValue;
+    todoArr.push(obj);
+    todoArr.forEach((i) => {
+      added = document.createElement("div");
+      added.setAttribute("class", "todo-allowed added");
+      added.setAttribute("data-id", `${i.id}`);
+      added.innerHTML = `<span id=${i.id}>${i.value}</span>
+        <button class="tick" id="check">
+        <i class="fas fa-solid fa-check"></i>
+      </button>
+      <button class="trash" id="trash">
+        <i class="fas fa-solid fa-trash"></i>
+      </button>`;
+
+      console.log(i);
+      console.log(added);
+    });
+    inputTodo.value = "";
+    display(added);
+  }
+    let check1 = document.querySelectorAll(".tick");
+    for (let i = 0; i < check1.length; i++) {
+      check1[i].onclick = function () {
+        this.parentNode.firstElementChild.style.textDecoration = "line-through";
+        this.parentNode.classList.add("completed");
+        todoArr[i].completed = true;
+        console.log(todoArr);
+      };
+    }
+
+    let trash1 = document.querySelectorAll(".trash");
+    for (let i = 0; i < trash1.length; i++) {
+      trash1[i].onclick = function () {
+        console.log(this.parentNode.firstElementChild.id);
+        index = todoArr.findIndex(
+          (item) => item.id == this.parentNode.firstElementChild.id
+        );
+        todoArr.splice(index, 1);
+        this.parentNode.remove();
+        console.log(todoArr);
+      };
+    }
+
+    allButton.onclick = () => {
+      let todo = document.querySelectorAll(".added");
+      for (let i = 0; i < todo.length; i++) {
+        todo[i].style.display = "flex";
+      }
+      console.log(todoArr);
+    };
+
+    incompleteButton.onclick = () => {
+      let todo = document.querySelectorAll(".added");
+      for (let i = 0; i < todo.length; i++) {
+        if (todoArr[i].completed == true) {
+          todo[i].style.display = "none";
+        } else {
+          todo[i].style.display = "flex";
+        }
+      }
+      console.log(todoArr);
+    };
+
+    completedButton.onclick = () => {
+      let todo = document.querySelectorAll(".added");
+      for (let i = 0; i < todo.length; i++) {
+        if (todoArr[i].completed == true) {
+          todo[i].style.display = "flex";
+        } else {
+          todo[i].style.display = "none";
+        }
+      }
+      console.log(todoArr);
+    };
+
+    clearCompletedButton.onclick = () => {
+      let todo = document.querySelectorAll(".added");
+      for (let i = 0; i < todo.length; i++) {
+        console.log(todoArr[i])
+        let id = todo[i].dataset.id
+        var index= todoArr.findIndex(item=>Number(item.id)==Number(id))
+        if (todoArr[index].completed == true) {
+        
+          todo[i].remove();
+          // let index = todoArr.findIndex(item => Number(item.id) == Number(id))
+          // let index= todoArr.findIndex(item=>Number(item.id)==Number(id))
+          todoArr.splice(index, 1);
+        }
+      }
+      console.log(todoArr);
+    };
+
+    clearButton.onclick = () => {
+      let todo = document.querySelectorAll(".added");
+      for (let i = 0; i < todo.length; i++) {
+        todo[i].remove();
+      }
+      todoArr = [];
+      console.log(todoArr);
+    };
+  }
+
+
+inputTodo.addEventListener("keyup", (event) => {
+  if (event.key == "Enter") {
+    run();
+  }
+});
