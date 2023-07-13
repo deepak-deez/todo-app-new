@@ -13,7 +13,6 @@ let added;
 var todoArr = [];
 function display(added) {
   displayTodo.appendChild(added);
-  // console.log("done");
 }
 function run() {
   let inputTodoValue = inputTodo.value.trim();
